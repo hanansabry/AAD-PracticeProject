@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".SubmitActivity"
+        android:background="@drawable/background">
+
+        <include layout="@layout/custom_toolbar_for_submit_activity"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Project Submission"
+            android:textColor="#fdc070"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:layout_marginTop="32dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/line_gradient_bg"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/tInputEt_firstName"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:inputType="textPersonName"
+                    android:text="@={model.observableForm.firstName}"
+                    android:textColor="@android:color/black"
+                    app:error="@{model.firstNameError}"
+                    android:padding="16dp"
+                    android:hint="FirstName"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/rounded_edittext"/>
+
+
+                <EditText
+                    android:id="@+id/tInputEt_lastName"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:inputType="textPersonName"
+                    android:text="@={model.observableForm.lastName}"
+                    android:textColor="@android:color/black"
+                    app:error="@{model.lastNameError}"
+                    android:padding="16dp"
+                    android:hint="Last Name"
+                    android:background="@drawable/rounded_edittext"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tInputEt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="16dp"
+                android:inputType="textEmailAddress"
+                android:text="@={model.observableForm.email}"
+                android:textColor="@android:color/black"
+                app:error="@{model.emailError}"
+                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:hint="Email Address"
+                android:background="@drawable/rounded_edittext"/>
+
+            <EditText
+                android:id="@+id/tInputEt_projectUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="16dp"
+                android:inputType="textUri"
+                android:text="@={model.observableForm.projectUrl}"
+                android:textColor="@android:color/black"
+                app:error="@{model.projectUrlError}"
+                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:hint="Project on GITHUB (link)"
+                android:background="@drawable/rounded_edittext"/>
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:onClick="@{() -> model.onSubmitClicked()}"
+            android:text="Submit"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_gradient_button"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.android.aadpracticeproject.domain.viewmodels.SubmitFormViewModel" />
+    </data>
+</layout>
