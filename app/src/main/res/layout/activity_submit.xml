@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".SubmitActivity"
+        tools:context=".presentation.screens.SubmitActivity"
         android:background="@drawable/background">
 
         <include layout="@layout/custom_toolbar_for_submit_activity"/>

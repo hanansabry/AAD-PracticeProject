@@ -1,6 +1,5 @@
-package com.android.aadpracticeproject;
+package com.android.aadpracticeproject.presentation.screens;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -9,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.aadpracticeproject.Injection;
+import com.android.aadpracticeproject.R;
 import com.android.aadpracticeproject.databinding.ActivitySubmitBinding;
 import com.android.aadpracticeproject.domain.viewmodels.SubmitFormViewModel;
 import com.android.aadpracticeproject.domain.viewmodels.factory.SubmissionViewModelFactory;

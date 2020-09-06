@@ -1,9 +1,14 @@
 package com.android.aadpracticeproject.data.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Learner {
 
+    public enum LearnerType {Leader, SkillIq};
+
     private String name;
-    private int hours;
+    @SerializedName(value = "hours",alternate = "score")
+    private int value;
     private String country;
     private String badgeUrl;
 
@@ -15,12 +20,12 @@ public class Learner {
         this.name = name;
     }
 
-    public int getHours() {
-        return hours;
+    public int getValue() {
+        return value;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public String getCountry() {
