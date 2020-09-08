@@ -2,7 +2,6 @@ package com.android.aadpracticeproject.presentation.screens;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.aadpracticeproject.Injection;
 import com.android.aadpracticeproject.R;
@@ -41,10 +40,10 @@ public class SubmitActivity extends AppCompatActivity {
 
         submissionViewModel.getResponse().observe(this, response -> {
             if (response == 1) {
-                Toast.makeText(this, "Submission Successful", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Submission Successful", Toast.LENGTH_SHORT).show();
                 new SuccessDialog(this).show();
             } else {
-                Toast.makeText(this, "Submission not Successful", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Submission not Successful", Toast.LENGTH_SHORT).show();
                 new FailedDialog(this).show();
             }
         });
