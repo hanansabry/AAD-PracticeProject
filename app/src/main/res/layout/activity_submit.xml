@@ -108,7 +108,7 @@
         <Button
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:onClick="@{() -> model.onSubmitClicked()}"
+            android:onClick="onSubmitClicked"
             android:text="Submit"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -121,7 +121,6 @@
     </LinearLayout>
 
     <data>
-
         <variable
             name="model"
             type="com.android.aadpracticeproject.domain.viewmodels.SubmitFormViewModel" />

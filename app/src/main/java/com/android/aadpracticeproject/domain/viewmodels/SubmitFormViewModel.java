@@ -2,23 +2,26 @@ package com.android.aadpracticeproject.domain.viewmodels;
 
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.webkit.URLUtil;
 
 import com.android.aadpracticeproject.data.models.SubmitRequest;
 import com.android.aadpracticeproject.domain.repositories.SubmissionRepository;
+import com.android.aadpracticeproject.domain.viewmodels.utils.Event;
 
-import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SubmitFormViewModel extends ViewModel {
 
-    public ObservableForm observableForm = new ObservableForm();
-    public MutableLiveData<String> emailError = new MutableLiveData<>();
-    public MutableLiveData<String> firstNameError = new MutableLiveData<>();
-    public MutableLiveData<String> lastNameError = new MutableLiveData<>();
-    public MutableLiveData<String> projectUrlError = new MutableLiveData<>();
+    private ObservableForm observableForm = new ObservableForm();
+    private MutableLiveData<String> emailError = new MutableLiveData<>();
+    private MutableLiveData<String> firstNameError = new MutableLiveData<>();
+    private MutableLiveData<String> lastNameError = new MutableLiveData<>();
+    private MutableLiveData<String> projectUrlError = new MutableLiveData<>();
 
-    public MutableLiveData<Integer> response = new MutableLiveData<>();
+    private MutableLiveData<Integer> response = new MutableLiveData<>();
+    private MutableLiveData<Event<Boolean>> isValidObserver = new MutableLiveData<>();
     private SubmissionRepository repository;
 
     public SubmitFormViewModel(SubmissionRepository repository) {
@@ -29,7 +32,7 @@ public class SubmitFormViewModel extends ViewModel {
         repository.postSubmissionData(submitRequest, response);
     }
 
-    public void onSubmitClicked() {
+    public void validateData() {
         boolean isValid = true;
         if (TextUtils.isEmpty(observableForm.getFirstName())) {
             firstNameError.postValue("Field is required");
@@ -48,6 +51,9 @@ public class SubmitFormViewModel extends ViewModel {
         if (TextUtils.isEmpty(observableForm.getProjectUrl())) {
             isValid = false;
             projectUrlError.postValue("Field is required");
+        } else if (!URLUtil.isValidUrl(observableForm.getProjectUrl())) {
+            projectUrlError.postValue("Invalid url");
+            isValid = false;
         } else {
             projectUrlError.postValue(null);
         }
@@ -63,14 +69,44 @@ public class SubmitFormViewModel extends ViewModel {
         }
 
         if (isValid) {
-            SubmitRequest submitRequest = new SubmitRequest(
-                    observableForm.getFirstName(),
-                    observableForm.getLastName(),
-                    observableForm.getEmail(),
-                    observableForm.getProjectUrl());
-            postSubmitRequest(submitRequest);
+            isValidObserver.setValue(new Event<>(true));
         }
-
     }
 
+    public void onSubmitClicked() {
+        SubmitRequest submitRequest = new SubmitRequest(
+                observableForm.getFirstName(),
+                observableForm.getLastName(),
+                observableForm.getEmail(),
+                observableForm.getProjectUrl());
+        postSubmitRequest(submitRequest);
+    }
+
+    public MutableLiveData<Integer> getResponse() {
+        return response;
+    }
+
+    public LiveData<Event<Boolean>> getIsValidObserver() {
+        return isValidObserver;
+    }
+
+    public ObservableForm getObservableForm() {
+        return observableForm;
+    }
+
+    public MutableLiveData<String> getEmailError() {
+        return emailError;
+    }
+
+    public MutableLiveData<String> getFirstNameError() {
+        return firstNameError;
+    }
+
+    public MutableLiveData<String> getLastNameError() {
+        return lastNameError;
+    }
+
+    public MutableLiveData<String> getProjectUrlError() {
+        return projectUrlError;
+    }
 }
